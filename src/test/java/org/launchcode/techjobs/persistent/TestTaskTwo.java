@@ -418,22 +418,22 @@ public class TestTaskTwo extends AbstractTest {
 //    /*
 //    * Verifies that displayViewEmployer calls findById to retrieve an employer object
 //    * */
-//    @Test
-//    public void testDisplayViewEmployerCallsFindById (@Mocked EmployerRepository employerRepository) throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
-//        Class employerControllerClass = getClassByName("controllers.EmployerController");
-//        Method displayViewEmployerMethod = employerControllerClass.getMethod("displayViewEmployer", Model.class, int.class);
-//
-//        new Expectations() {{
-//           employerRepository.findById(1);
-//        }};
-//
-//        Model model = new ExtendedModelMap();
-//        EmployerController employerController = new EmployerController();
-//        Field employerRepositoryField = employerControllerClass.getDeclaredField("employerRepository");
-//        employerRepositoryField.setAccessible(true);
-//        employerRepositoryField.set(employerController, employerRepository);
-//        displayViewEmployerMethod.invoke(employerController, model, 1);
-//    }
+    @Test
+    public void testDisplayViewEmployerCallsFindById (@Mocked EmployerRepository employerRepository) throws ClassNotFoundException, NoSuchMethodException, NoSuchFieldException, IllegalAccessException, InvocationTargetException {
+        Class employerControllerClass = getClassByName("controllers.EmployerController");
+        Method displayViewEmployerMethod = employerControllerClass.getMethod("displayViewEmployer", Model.class, int.class);
+
+        new Expectations() {{
+           employerRepository.findById(1);
+        }};
+
+        Model model = new ExtendedModelMap();
+        EmployerController employerController = new EmployerController();
+        Field employerRepositoryField = employerControllerClass.getDeclaredField("employerRepository");
+        employerRepositoryField.setAccessible(true);
+        employerRepositoryField.set(employerController, employerRepository);
+        displayViewEmployerMethod.invoke(employerController, model, 1);
+    }
 //
 //    /*
 //     * Verifies that the skillRepository field is correctly defined
