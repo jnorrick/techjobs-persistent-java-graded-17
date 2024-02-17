@@ -22,7 +22,7 @@ public class EmployerController {
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("employers", employerRepository.findAll());
-        return "employers/";
+        return "employers";
     }
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {
@@ -37,7 +37,7 @@ public class EmployerController {
             return "employers/add";
         }
         employerRepository.save(newEmployer);
-        return "redirect:";
+        return "redirect:/add";
     }
 
     @GetMapping("view/{employerId}")
