@@ -1,6 +1,7 @@
 package org.launchcode.techjobs.persistent.controllers;
 
 import jakarta.validation.Valid;
+import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.data.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ public class HomeController {
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
 
+
 //        model.addAttribute("skills", skillsRepository.findAll())? this is not in part 3 that I can tell but is in the tests for part 3?
         return "add";
     }
@@ -56,13 +58,17 @@ public class HomeController {
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model, @RequestParam int employerId) {
+        model.addAttribute("employers", employerRepository.findAll());
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Job");
-            model.addAttribute("employers", employerRepository.findAll());
             return "add";
+        } else {
+            Optional<Employer> result = employerRepository.findById(employerId);
+            Employer newEmployer = result.get();
+
+
         }
 
-        employerRepository.findById(employerId);
         return "redirect:";
     }
 
