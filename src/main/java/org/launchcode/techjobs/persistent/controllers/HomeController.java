@@ -30,7 +30,7 @@ public class HomeController {
         return "index";
     }
     @GetMapping("add")
-    public String displayAddJobForm(@RequestParam(required = false) Integer employerId,Model model) {
+    public String displayAddJobForm(Model model) {
         model.addAttribute("title", "Add Job");
         model.addAttribute(new Job());
         model.addAttribute("employers", employerRepository.findAll());
