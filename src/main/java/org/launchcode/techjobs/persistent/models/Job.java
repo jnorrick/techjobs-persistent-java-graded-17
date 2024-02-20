@@ -3,6 +3,7 @@ package org.launchcode.techjobs.persistent.models;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,14 +11,17 @@ public class Job extends AbstractEntity {
 
     @ManyToOne
     private Employer employer;
+    // consider adding "mapped by" if needed doesn't work whatever
     @ManyToMany
-    private List<Skill> skills;
+    private List<Skill> skills = new ArrayList<>();
 
 
     public Job() {
     }
 
     // Initialize the id and value fields.
+
+
     public Job(Employer anEmployer, List<Skill> someSkills) {
         super();
         this.employer = anEmployer;
